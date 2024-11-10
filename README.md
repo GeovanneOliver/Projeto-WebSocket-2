@@ -1,0 +1,2 @@
+Esse projeto foi criado seguindo o curso da Alura: WebSockets: implemente autenticação e avance no Socket.io <br>
+Esse é a continuação do curso anterior com algumas refatorações. O projeto do curso anterior está disposnível no repositório https://github.com/GeovanneOliver/Projeto-WebSocket
