@@ -5,10 +5,18 @@ import registrarEventosDocumento from "./registrarEventos/documento.js"
 import registrarEventosinicio from "./registrarEventos/inicio.js"
 import registrarEventosLogin from "./registrarEventos/login.js";
 import io from "./servidor.js";
+import autorizarUsuario from "./middlewares/autorizarUsuarios.js";
 
-io.on("connection", (socket) => {
+const nspUsuarios = io.of("/usuarios");
+
+nspUsuarios.use(autorizarUsuario);
+
+nspUsuarios.on("connection", (socket)=>{
+  registrarEventosinicio(socket, nspUsuarios);
+  registrarEventosDocumento(socket, nspUsuarios);  
+});
+
+io.of("/").on("connection", (socket) => {
   registrarEventosCadastros(socket, io);
   registrarEventosLogin(socket, io);
-  registrarEventosinicio(socket, io);
-  registrarEventosDocumento(socket, io);  
 });
